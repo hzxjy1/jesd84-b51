@@ -1,0 +1,6 @@
+[package]
+name = "jesd84-b51"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
