@@ -2,7 +2,7 @@ use std::{error::Error, fs, io, path::Path};
 
 #[derive(Debug)]
 pub struct Jesd84B51 {
-    bytes: [u8; 512],
+    pub bytes: [u8; 512],
 }
 
 impl Jesd84B51 {
@@ -54,12 +54,4 @@ impl Jesd84B51 {
         let product_vec: Vec<u8> = vec1.iter().zip(vec2.iter()).map(|(a, b)| a + b).collect();
         Ok(product_vec)
     }
-
-    pub fn get_bytes(&self) -> &[u8; 512] {
-        &self.bytes
-    }
-
-    // pub fn set_bytes(&mut self, new_bytes: [u8; 512]) {
-    //     self.bytes = new_bytes;
-    // }
 }
