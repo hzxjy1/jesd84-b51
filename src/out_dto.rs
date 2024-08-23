@@ -14,9 +14,9 @@ pub struct OutDto {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct OutDtoObj {
-    id: u16,
-    name: String,
-    data: Vec<u8>,
+    pub id: u16,
+    pub name: String,
+    pub data: Vec<u8>,
 }
 
 impl OutDto {
@@ -37,6 +37,15 @@ impl OutDto {
     pub fn to_json(&self) -> Result<String, Box<dyn Error>> {
         let json = serde_json::to_string(self)?;
         Ok(json)
+    }
+}
+
+impl<'a> IntoIterator for &'a OutDto {
+    type Item = &'a OutDtoObj;
+    type IntoIter = std::slice::Iter<'a, OutDtoObj>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.array.iter()
     }
 }
 

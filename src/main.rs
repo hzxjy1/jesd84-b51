@@ -1,17 +1,22 @@
 use std::path::Path;
 
+mod cli;
 mod jesd84_b51;
-pub mod out_dto;
+mod out_dto;
 mod sheet_orm;
+use clap::Parser;
+use cli::{make_table, Cli};
 use jesd84_b51::Jesd84B51;
 use out_dto::OutDto;
 use sheet_orm::SheetOrm;
 
 fn main() {
-    let jesd84_b51 = Jesd84B51::new(Path::new("/home/hzxjy/jesd84-b51/data/binary.txt")).unwrap();
-    let sheet_orm =
-        SheetOrm::new(Path::new("/home/hzxjy/jesd84-b51/data/JESD84-B51.json")).unwrap();
+    let args = Cli::parse();
+    let jesd84_b51 = Jesd84B51::new(Path::new(&args.binary_file)).unwrap();
+    let sheet_orm = SheetOrm::new(Path::new(&args.json_file)).unwrap();
     let out_dto = OutDto::new(&sheet_orm, &jesd84_b51).unwrap();
-    let json_str=out_dto.to_json().unwrap();
-    println!("{}", json_str);
+    // let json_str = out_dto.to_json().unwrap();
+    // println!("{}", json_str);
+    let table = make_table(out_dto);
+    table.printstd()
 }

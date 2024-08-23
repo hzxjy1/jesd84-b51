@@ -46,6 +46,15 @@ impl Index<usize> for SheetOrm {
     }
 }
 
+impl<'a> IntoIterator for &'a SheetOrm {
+    type Item = &'a SheetOrmObj;
+    type IntoIter = std::slice::Iter<'a, SheetOrmObj>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.array.iter()
+    }
+}
+
 fn parse_csd_slice<'de, D>(deserializer: D) -> Result<Vec<u16>, D::Error>
 where
     D: Deserializer<'de>,
@@ -75,15 +84,6 @@ where
         _ => Err(de::Error::custom(
             "Invalid format: expected format [start:end] or [num]",
         )),
-    }
-}
-
-impl<'a> IntoIterator for &'a SheetOrm {
-    type Item = &'a SheetOrmObj;
-    type IntoIter = std::slice::Iter<'a, SheetOrmObj>;
-
-    fn into_iter(self) -> Self::IntoIter {
-        self.array.iter()
     }
 }
 
@@ -134,8 +134,7 @@ mod tests {
 
     #[test]
     fn new_in_file() -> Result<(), Box<dyn Error>> {
-        let sheet_orm=SheetOrm::new(&Path::new("/home/hzxjy/jesd84-b51/data/JESD84-B51.json"))?;
-        assert_eq!(2, 1);
+        let _ = SheetOrm::new(&Path::new("/home/hzxjy/jesd84-b51/data/JESD84-B51.json"))?;
         Ok(())
     }
 
