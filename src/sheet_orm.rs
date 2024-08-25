@@ -1,4 +1,11 @@
-use std::{error::Error, fs, ops::Index, path::Path};
+use std::io::Write;
+use std::{
+    error::Error,
+    fs::{self, File},
+    io,
+    ops::Index,
+    path::Path,
+};
 
 use serde::{
     de::{self, Unexpected},
@@ -35,6 +42,33 @@ impl SheetOrm {
         let json_str = fs::read_to_string(file_path)?;
         let sheet_orm: SheetOrm = serde_json::from_str(&json_str)?;
         Ok(sheet_orm)
+    }
+
+    pub fn gen_simplify_conf(&self, path: String) -> Result<(), Box<dyn Error>> {
+        let file = File::create(&path)?;
+        let mut writer = io::BufWriter::new(file);
+        for item in self.array.iter() {
+            let format = format!(
+                "{}:{}:{}",
+                item.id,
+                item.data.name,
+                if item.data.csd_slice.len() > 1 {
+                    format!("{}:{}", item.data.csd_slice[0], item.data.csd_slice[1])
+                } else if item.data.csd_slice.len() == 1 {
+                    format!("{}:{}", item.data.csd_slice[0], u16::MAX)
+                } else {
+                    "No CSD Slice".to_string()
+                }
+            );
+
+            // 将格式化字符串写入文件，并换行
+            writeln!(writer, "{}", format)?;
+        }
+
+        // 确保所有内容都被写入文件
+        writer.flush()?;
+
+        Ok(())
     }
 }
 
@@ -144,6 +178,14 @@ mod tests {
 
         assert_eq!(sheet_orm[0].id, 1);
         assert_eq!(sheet_orm[1].data.name, "Extended Security Commands Error");
+        Ok(())
+    }
+
+    #[test]
+    fn gen_simplify_conf_test() -> Result<(), Box<dyn Error>> {
+        let obj = mock_data()?;
+        obj.gen_simplify_conf("/home/hzxjy/aaaa.txt".to_string())?;
+        assert_eq!(2, 1);
         Ok(())
     }
 }

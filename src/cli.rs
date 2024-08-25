@@ -12,6 +12,10 @@ pub struct Cli {
     /// Specifies the text file
     #[arg(short = 'b', long = "binary")]
     pub binary_file: String,
+
+    /// Export configuration
+    #[arg(short = 'e', long = "export")]
+    pub path: Option<String>,
 }
 
 pub fn make_table(out_dto: OutDto) -> Table {
