@@ -21,14 +21,14 @@ struct jesd84b51 {
 
 int run(const char *const binary_path, const char *const config_path);
 void printd(const char *format, ...);
-int get_binary_array(const char *const path, uint8_t *const buffer,
+int _get_binary_array(const char *const path, uint8_t *const buffer,
                      uint16_t len);
-int read_configuration(const char *const path, struct jesd84b51 *const j_array,
+int _read_configuration(const char *const path, struct jesd84b51 *const j_array,
                        uint8_t *const j_len);
 int _column_parser(char *const str, const char *const token,
                    struct jesd84b51 *const j);
 void _print_jesd84b51(const struct jesd84b51 *j);
-int fill_cell_value(struct jesd84b51 *const j, uint8_t const j_len,
+int _fill_cell_value(struct jesd84b51 *const j, uint8_t const j_len,
                     uint8_t *const buffer);
 
 size_t LENGTH = 1024 / 2;
@@ -44,13 +44,13 @@ int main() {
 int run(const char *const binary_path, const char *const config_path) {
   uint8_t data_buffer[LENGTH];
 
-  if (get_binary_array(binary_path, data_buffer, LENGTH))
+  if (_get_binary_array(binary_path, data_buffer, LENGTH))
     return 1;
   struct jesd84b51 j_arr[UINT8_MAX];
   uint8_t j_len = 0;
-  if (read_configuration(config_path, j_arr, &j_len))
+  if (_read_configuration(config_path, j_arr, &j_len))
     return 1;
-  fill_cell_value(j_arr, j_len, data_buffer);
+  _fill_cell_value(j_arr, j_len, data_buffer);
 
   printd("buffer\n");
   for (int i = 0; i < LENGTH; i++) {
@@ -72,7 +72,7 @@ void printd(const char *format, ...) {
   }
 }
 
-int get_binary_array(const char *const path, uint8_t *const buffer,
+int _get_binary_array(const char *const path, uint8_t *const buffer,
                      uint16_t len) {
   const size_t FILE_LENGTH = LENGTH * 2;
   const int fd = open(path, O_RDONLY);
@@ -116,7 +116,7 @@ int get_binary_array(const char *const path, uint8_t *const buffer,
   return 0;
 };
 
-int read_configuration(const char *const path, struct jesd84b51 *const j_array,
+int _read_configuration(const char *const path, struct jesd84b51 *const j_array,
                        uint8_t *const j_len) {
   const int fd = open(path, O_RDONLY);
   if (fd == -1) {
@@ -183,7 +183,7 @@ int _column_parser(char *const str, const char *const token,
   return 0;
 };
 
-int fill_cell_value(struct jesd84b51 *const j, uint8_t const j_len,
+int _fill_cell_value(struct jesd84b51 *const j, uint8_t const j_len,
                     uint8_t *const buffer) {
   for (uint8_t i = 0; i < j_len; i++) {
     uint8_t m = 0;
