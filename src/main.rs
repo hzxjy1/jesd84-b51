@@ -16,7 +16,7 @@ fn main() {
     let sheet_orm = SheetOrm::new(Path::new(&args.json_file)).unwrap();
     let out_dto = OutDto::new(&sheet_orm, &jesd84_b51).unwrap();
     let _ = match args.path {
-        Some(path) => sheet_orm.gen_simplify_conf(path),
+        Some(path) => sheet_orm.gen_simplify_conf(path, ","),
         None => Ok(()),
     };
     let table = make_table(out_dto);

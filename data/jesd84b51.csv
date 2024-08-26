@@ -1,0 +1,157 @@
+1,Reserved,511,506
+2,Extended Security Commands Error,505,65535
+3,Supported Command Sets,504,65535
+4,HPI features,503,65535
+5,Background operations support,502,65535
+6,Max packed read commands,501,65535
+7,Max packed write commands,500,65535
+8,Data Tag Support,499,65535
+9,Tag Unit Size,498,65535
+10,Tag Resources Size,497,65535
+11,Context management capabilities,496,65535
+12,Large Unit size,495,65535
+13,Extended partitions attribute support,494,65535
+14,Supported modes,493,65535
+15,FFU features,492,65535
+16,Operation codes timeout,491,65535
+17,FFU Argument,490,487
+18,Barrier support,486,65535
+19,Reserved,485,309
+20,CMD Queuing Support,308,65535
+21,CMD Queuing Depth,307,65535
+22,Reserved,306,65535
+23,Number of FW sectors correctly programmed,305,302
+24,Vendor proprietary health report,301,270
+25,Device life time estimation type B,269,65535
+26,Device life time estimation type A,268,65535
+27,Pre EOL information,267,65535
+28,Optimal read size,266,65535
+29,Optimal write size,265,65535
+30,Optimal trim unit size,264,65535
+31,Device version,263,262
+32,Firmware version,261,254
+33,Power class for 200MHz DDR at VCC= 3.6V,253,65535
+34,Cache size,252,249
+35,Generic CMD6 timeout,248,65535
+36,Power off notification(long) timeout,247,65535
+37,Background operations status,246,65535
+38,Number of correctly programmed sectors,245,242
+39,1st initialization time after partitioning,241,65535
+40,Cache Flushing Policy,240,65535
+41,Power class for 52MHz DDR at VCC = 3.6V,239,65535
+42,Power class for 52MHz DDR at VCC = 1.95V,238,65535
+43,Power class for 200MHz at VCCQ =1.95V VCC = 3.6V,237,65535
+44,Power class for 200MHz at VCCQ =1.3V VCC = 3.6V,236,65535
+45,Minimum Write Performance for 8bit at 52MHz in DDR mode,235,65535
+46,Minimum Read Performance for 8bit at 52MHz in DDR mode,234,65535
+47,Reserved,233,65535
+48,TRIM Multiplier,232,65535
+49,Secure Feature support,231,65535
+50,Secure Erase Multiplier,230,65535
+51,Secure TRIM Multiplier,229,65535
+52,Boot information,228,65535
+53,Reserved,227,65535
+54,Boot partition size,226,65535
+55,Access size,225,65535
+56,High-capacity erase unit size,224,65535
+57,High-capacity erase timeout,223,65535
+58,Reliable write sector count,222,65535
+59,High-capacity write protect group size,221,65535
+60,Sleep current (VCC),220,65535
+61,Sleep current (VCCQ),219,65535
+62,Production state awareness timeout,218,65535
+63,Sleep/awake timeout,217,65535
+64,Sleep Notification Timeout,216,65535
+65,Sector Count,215,212
+66,Secure Write Protect Information,211,65535
+67,Minimum Write Performance for 8bit at 52 MHz,210,65535
+68,Minimum Read Performance for 8bit at 52 MHz,209,65535
+69,Minimum Write Performance for 8bit at 26 MHz for 4bit at 52MHz,208,65535
+70,Minimum Read Performance for 8bit at 26 MHz for 4bit at 52MHz,207,65535
+71,Minimum Write Performance for 4bit at 26 MHz,206,65535
+72,Minimum Read Performance for 4bit at 26 MHz,205,65535
+73,Reserved,204,65535
+74,Power class for 26 MHz at 3.6 V,203,65535
+75,Power class for 52 MHz at 3.6 V,202,65535
+76,Power class for 26 MHz at 1.95 V,201,65535
+77,Power class for 52 MHz at 1.95 V,200,65535
+78,Partition switching timing,199,65535
+79,Out-of-interrupt busy timing,198,65535
+80,I/O Driver Strength,197,65535
+81,Device type,196,65535
+82,Reserved,195,65535
+83,CSD STRUCTURE,194,65535
+84,Reserved,193,65535
+85,Extended CSD revision,192,65535
+86,Command set,191,65535
+87,Reserved,190,65535
+88,Command set revision,189,65535
+89,Reserved,188,65535
+90,Power class,187,65535
+91,Reserved,186,65535
+92,High-speed interface timing,185,65535
+93,Strobe Support,184,65535
+94,Bus width mode,183,65535
+95,Reserved,182,65535
+96,Erased memory content,181,65535
+97,Reserved,180,65535
+98,Partition configuration,179,65535
+99,Boot config protection,178,65535
+100,Boot bus Conditions,177,65535
+101,Reserved,176,65535
+102,High-density erase group definition,175,65535
+103,Boot write protection status registers,174,65535
+104,Boot area write protection register,173,65535
+105,Reserved,172,65535
+106,User area write protection register,171,65535
+107,Reserved,170,65535
+108,FW configuration,169,65535
+109,RPMB Size,168,65535
+110,Write reliability setting register,167,65535
+111,Write reliability parameter register,166,65535
+112,Start Sanitize operation,165,65535
+113,Manually start background operations,164,65535
+114,Enable background operations handshake,163,65535
+115,H/W reset function,162,65535
+116,HPI management,161,65535
+117,Partitioning Support,160,65535
+118,Max Enhanced Area Size,159,157
+119,Partitions attribute,156,65535
+120,Partitioning Setting,155,65535
+121,General Purpose Partition Size,154,143
+122,Enhanced User Data Area Size,142,140
+123,Enhanced User Data Start Address,139,136
+124,Reserved,135,65535
+125,Bad Block Management mode,134,65535
+126,Production state awareness,133,65535
+127,Package Case Temperature is controlled,132,65535
+128,Periodic Wake-up,131,65535
+129,Program CID/CSD in DDR mode support,130,65535
+130,Reserved,129,128
+131,Vendor Specific Fields,127,64
+132,Native sector size,63,65535
+133,Sector size emulation,62,65535
+134,Sector size,61,65535
+135,1st initialization after disabling sector size emulation,60,65535
+136,Class 6 commands control,59,65535
+137,Number of addressed group to be Released,58,65535
+138,Exception events control,57,56
+139,Exception events status,55,54
+140,Extended Partitions Attribute,53,52
+141,Context configuration,51,37
+142,Packed command status,36,65535
+143,Packed command failure index,35,65535
+144,Power Off Notification,34,65535
+145,Control to turn the Cache ON/OFF,33,65535
+146,Flushing of the cache,32,65535
+147,Control to turn the Barrier ON/OFF,31,65535
+148,Mode config,30,65535
+149,Mode operation codes,29,65535
+150,Reserved,28,27
+151,FFU status,26,65535
+152,Pre loading data size,25,22
+153,Max pre loading data size,21,18
+154,Product state awareness enablement,17,65535
+155,Secure Removal Type,16,65535
+156,Command Queue Mode Enable,15,65535
+157,Reserved,14,0

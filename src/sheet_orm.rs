@@ -44,18 +44,23 @@ impl SheetOrm {
         Ok(sheet_orm)
     }
 
-    pub fn gen_simplify_conf(&self, path: String) -> Result<(), Box<dyn Error>> {
+    pub fn gen_simplify_conf(&self, path: String, token: &str) -> Result<(), Box<dyn Error>> {
         let file = File::create(&path)?;
         let mut writer = io::BufWriter::new(file);
         for item in self.array.iter() {
             let format = format!(
-                "{}:{}:{}",
+                "{}{}{}{}{}",
                 item.id,
+                token,
                 item.data.name,
+                token,
                 if item.data.csd_slice.len() > 1 {
-                    format!("{}:{}", item.data.csd_slice[0], item.data.csd_slice[1])
+                    format!(
+                        "{}{}{}",
+                        item.data.csd_slice[0], token, item.data.csd_slice[1]
+                    )
                 } else if item.data.csd_slice.len() == 1 {
-                    format!("{}:{}", item.data.csd_slice[0], u16::MAX)
+                    format!("{}{}{}", item.data.csd_slice[0], token, u16::MAX)
                 } else {
                     "No CSD Slice".to_string()
                 }
@@ -184,7 +189,7 @@ mod tests {
     #[test]
     fn gen_simplify_conf_test() -> Result<(), Box<dyn Error>> {
         let obj = mock_data()?;
-        obj.gen_simplify_conf("/home/hzxjy/aaaa.txt".to_string())?;
+        obj.gen_simplify_conf("/home/hzxjy/aaaa.txt".to_string(), ",s")?;
         assert_eq!(2, 1);
         Ok(())
     }
