@@ -22,20 +22,25 @@ struct jesd84b51 {
 int run(const char *const binary_path, const char *const config_path);
 void printd(const char *format, ...);
 int _get_binary_array(const char *const path, uint8_t *const buffer,
-                     uint16_t len);
+                      uint16_t len);
 int _read_configuration(const char *const path, struct jesd84b51 *const j_array,
-                       uint8_t *const j_len);
+                        uint8_t *const j_len);
 int _column_parser(char *const str, const char *const token,
                    struct jesd84b51 *const j);
 void _print_jesd84b51(const struct jesd84b51 *j);
 int _fill_cell_value(struct jesd84b51 *const j, uint8_t const j_len,
-                    uint8_t *const buffer);
+                     uint8_t *const buffer);
 
 size_t LENGTH = 1024 / 2;
 
-int main() {
-  const char binary_path[] = "../data/binary.txt";
-  const char config_path[] = "../data/jesd84b51.csv";
+int main(int argc, char *argv[]) {
+  if (argc != 3) {
+    fprintf(stderr, "Usage: %s <input_file> <output_file>\n", argv[0]);
+    return 1;
+  }
+
+  const char *binary_path = argv[1];
+  const char *config_path = argv[2];
   if (run(binary_path, config_path))
     return 1;
   return 0;
@@ -73,7 +78,7 @@ void printd(const char *format, ...) {
 }
 
 int _get_binary_array(const char *const path, uint8_t *const buffer,
-                     uint16_t len) {
+                      uint16_t len) {
   const size_t FILE_LENGTH = LENGTH * 2;
   const int fd = open(path, O_RDONLY);
   if (fd == -1) {
@@ -117,7 +122,7 @@ int _get_binary_array(const char *const path, uint8_t *const buffer,
 };
 
 int _read_configuration(const char *const path, struct jesd84b51 *const j_array,
-                       uint8_t *const j_len) {
+                        uint8_t *const j_len) {
   const int fd = open(path, O_RDONLY);
   if (fd == -1) {
     perror("Failed to open file");
@@ -184,7 +189,7 @@ int _column_parser(char *const str, const char *const token,
 };
 
 int _fill_cell_value(struct jesd84b51 *const j, uint8_t const j_len,
-                    uint8_t *const buffer) {
+                     uint8_t *const buffer) {
   for (uint8_t i = 0; i < j_len; i++) {
     uint8_t m = 0;
     if (j[i].cell_num[1] != UINT16_MAX) { // Have cell range
